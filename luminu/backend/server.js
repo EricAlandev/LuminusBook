@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import sequelize from "../backend/db.js"; // <-- importa a conexão Sequelize
-import Usuario from "../backend/models/Usuario.js"; // <-- importa o model
+import sequelize from "./db.js"; // <-- importa a conexão Sequelize
+import Usuario from "./models/Usuario.js"; // <-- importa o model
 
 const app = express();
 
@@ -32,5 +32,5 @@ app.get("/", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3306;
 app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
