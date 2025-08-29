@@ -1,6 +1,6 @@
 // models/Usuario.js
 import { DataTypes } from "sequelize";
-import sequelize from "../db"; // arquivo de conexão Sequelize
+import sequelize from "../db.js"; // arquivo de conexão Sequelize
 
 const Usuario = sequelize.define("Usuario", {
   nome: {
