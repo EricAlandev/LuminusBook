@@ -7,7 +7,7 @@ const sequelize = new Sequelize(
   process.env.PASSWORD, // senha
   {
     host: process.env.HOST,
-    port: process.env.PORT || 3306,
+    port: Number(process.env.PORT) || 3306,
     dialect: 'mysql',
     logging: false, // desativa logs SQL no console
     pool: {
@@ -22,6 +22,6 @@ const sequelize = new Sequelize(
 // Testar conexão
 sequelize.authenticate()
   .then(() => console.log('✅ Conectado ao MySQL  com Sequelize!'))
-  .catch(err => console.error('❌ Erro ao conectar no PostgreSQL:', err));
+  .catch(err => console.error('❌ Erro ao conectar no MySQL:', err));
 
 export default sequelize;
