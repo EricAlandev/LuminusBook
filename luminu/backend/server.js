@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import sequelize from "./db.js"; // <-- importa a conexão Sequelize
-import Usuario from "./models/Usuario.js"; // <-- importa o model
+import usuarioRoutes from './routes/usuarioRoutes.js'
 
 const app = express();
 
@@ -12,14 +12,16 @@ app.use("/assets", express.static("assets"));
 
 app.get("/favicon.ico", (req, res) => res.sendStatus(204)); // sem conteúdo
 
+app.use('/api', usuarioRoutes);
+
 // Health Check
 app.get("/", async (req, res) => {
   try {
-    await sequelize.authenticate(); // testa a conexão com o banco
+    await sequelize.authenticate(); // testa conexão
     res.json({
       status: "✅ API ativa",
       database: "✅ Conectado",
-      message: "Use /usuarios para ver os dados.",
+      message: "Use /api/usuarios para criar usuários.",
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
@@ -31,6 +33,7 @@ app.get("/", async (req, res) => {
     });
   }
 });
+
 
 const port = process.env.PORT || 3306;
 app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
