@@ -2,16 +2,24 @@
 
 //Esqueleto feito para definir os valores dos inputs
 
-const ValorInput = ({htmlfor,titulo, tipo, nome, idName, valor, onMudanca, placeholder}) => {
+const ValorInput = ({htmlfor,titulo, funcaoFechar, fecharTitulo, tipo, nome, idName, valor, onMudanca, placeholder}) => {
 
 
     return(
         <div className="flex flex-col">
-            <label htmlFor={htmlfor}
-            className="  font-[Inter] font-medium text-[18.5px]"
-            >
-                {titulo}
-            </label>
+            
+            <div className="flex gap-18.5">
+                <label htmlFor={htmlfor}
+                className="  font-[Inter] font-medium text-[18.5px]"
+                >
+                    {titulo}
+                </label>
+
+                    <h2 
+                onClick={funcaoFechar}
+                className="font-[Inter] font-medium text-[18px] text-[red] cursor-pointer"
+                >{fecharTitulo}</h2>
+            </div>
 
             <input 
             type={tipo}

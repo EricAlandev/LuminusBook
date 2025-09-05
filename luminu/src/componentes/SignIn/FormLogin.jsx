@@ -2,7 +2,10 @@
 
 
 import { useState } from "react";
+import {Link, useNavigate } from 'react-router-dom'
+import { useUser } from "../hooks/useUser";
 import axios from 'axios';
+
 
 
 import ValorInput from "../../componentes/esqueletos//ValorInput"
@@ -11,8 +14,10 @@ const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 
 //Form de cadastro
-
 const FormLogin = () => {
+
+    const navigate = useNavigate();
+    const { login} = useUser();
 
     const [nomeState, setNomeState] = useState({
         nome: "",
@@ -32,12 +37,16 @@ const FormLogin = () => {
       //  Função handleSubmit para enviar os dados
       const handleSubmit = async (e) => {
         e.preventDefault(); // previne reload da página
+
         try {
           const response = await axios.post(
-            BASE_URL/api/login, //Não por {} ao exp, pois vira objeto e quebra.
-            nomeState               // envia o objeto com nome, email e senha
+            `${BASE_URL}/api/login`, 
+            nomeState               // envia o objeto com     
+                                    //nome, email e senha
           );
-          console.log("Resposta da API:", response.data);
+          console.log("Resposta da API:", response.data.mensagem);
+
+          navigate('/login/codigo', { state: { email: response.data.email } })
           // aqui você pode redirecionar ou limpar o form
         } catch (error) {
           console.error("Erro ao cadastrar:", error);
@@ -74,12 +83,21 @@ const FormLogin = () => {
             placeholder={'Digite seu senha..'}
             />
 
+            <Link 
+            to={'/cadastro'}
+            className=" font-[Inter] font-medium text-[16.5px] underline"
+            >
+                Não possui conta?
+            </Link>
+
             <button
             type="submit"
             className="min-w-[230px] max-w-[250px] mx-auto mt-[10px] p-2 bg-[#F1F1F1F1] font-[Inter] font-medium text-[16.5px]"
             >
              Entrar
             </button>
+
+
 
           </div>
         </form>

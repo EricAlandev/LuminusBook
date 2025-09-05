@@ -1,13 +1,15 @@
 
 import { Outlet } from "react-router-dom"
-import HeaderDesk from "../componentes/header/HeaderDesk"
+import Footer from "../componentes/header/Footer"
+import Header from "../componentes/header/Header"
 
 const LayPadrao = () => {
 
     return(
     <>
-     <HeaderDesk/>
+     <Header/>
      <Outlet/>
+     <Footer/>
     </>
     )
 }

@@ -19,8 +19,18 @@ const Usuario = sequelize.define("Usuario", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+
+  codigoVerificacao: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+
+  codigoExpiraEm: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  }
 }, {
-  tableName: "usuarios", // tabela no PostgreSQL
+  tableName: "usuarios", 
   timestamps: false,     // sem createdAt/updatedAt
 });
 

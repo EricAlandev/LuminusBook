@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import sequelize from "./db.js"; // <-- importa a conexão Sequelize
 import usuarioRoutes from './routes/usuarioRoutes.js'
+import livrosRoutes from './routes/livrosRoutes.js'
 
 const app = express();
 
@@ -12,7 +13,10 @@ app.use("/assets", express.static("assets"));
 
 app.get("/favicon.ico", (req, res) => res.sendStatus(204)); // sem conteúdo
 
+//ROTAS
 app.use('/api', usuarioRoutes);
+app.use('/apiL', livrosRoutes);
+
 
 // Health Check
 app.get("/", async (req, res) => {
@@ -35,5 +39,5 @@ app.get("/", async (req, res) => {
 });
 
 
-const port = process.env.PORT || 3306;
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));

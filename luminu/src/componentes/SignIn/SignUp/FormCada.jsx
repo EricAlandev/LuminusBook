@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 
@@ -11,6 +12,7 @@ const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 //Form de cadastro
 
 const FormCada = () => {
+    const navigate = useNavigate()
 
     const [nomeState, setNomeState] = useState({
         nome: "",
@@ -36,6 +38,7 @@ const FormCada = () => {
             nomeState               // envia o objeto com nome, email e senha
           );
           console.log("Resposta da API:", response.data);
+          navigate('/login')
           // aqui você pode redirecionar ou limpar o form
         } catch (error) {
           console.error("Erro ao cadastrar:", error);
@@ -82,6 +85,14 @@ const FormCada = () => {
             onMudanca={handleChange}
             placeholder={'Digite seu senha..'}
             />
+
+            <Link 
+            to={'/login'}
+            className=" font-[Inter] font-medium text-[16.5px] underline"
+            >
+                Já possui conta?
+            </Link>
+
 
             <button
             type="submit"

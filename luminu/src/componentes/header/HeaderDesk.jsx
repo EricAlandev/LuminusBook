@@ -1,45 +1,117 @@
+import { Link, useNavigate } from "react-router-dom"
+import ValorInput from "../esqueletos/ValorInput"
+import { useState } from "react"
 
-import { useState } from "react";
-import {AnimatePresence, motion} from 'framer-motion'
+import axios from 'axios'
+
+import { useUser } from "../hooks/useUser"
+
+
+
 
 const HeaderDesk = () => {
 
-    const [open, setOpen] = useState(null);
+  const {user, token} = useUser();
 
+    //Header do desktop
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
+const navigate = useNavigate();
+
+const [valorPesquisa, setValorPesquisa] = useState({ pesquisa: "" });
+
+const handleChanger = (e) => {
+    const {name, value} = e.target;
+    setValorPesquisa((prev) => ({
+        ...prev,
+        [name]: value, // atualiza o campo pesquisado
+      }));
+    };
+
+const handleSubmit = async (e) => {
+    e.preventDefault(); 
+        try {
+          const response = await axios.post(`${BASE_URL}/apiL/pesquisar`, valorPesquisa);
+
+            // navega para outra página e envia os dados
+          navigate("/resultadoPesquisa", { state: { resultados: response.data.resultados,
+            tamanho:response.data.tamanho
+  } });
+            
+          console.log("Resposta da API:", response.data);
+        } catch (error) {
+          console.error("Erro na requisição:", error);
+        }
+      };
 
     return(
-     <main className=" bg-[#E5E5E5]">
-        <div className="flex justify-between items-center gap-28.5">
-                <img src="/assets/header/HamburguerMenu.png" alt=""
-                className="max-h-[37px] mt-[13px] ml-[30px]"
-                onClick={() => setOpen(true)}
-                />
 
-                <img src="/assets/header/Logo.png" alt=""
-                className="max-h-[80px]"/>
+        <div
+         className="hidden md:block md:bg-[#E5E5E5]"
+        >       
+            <div className=" md:flex md:flex-row md:justify-around md:items-center  md:max-w-[1250px] md:mx-auto">
+
+                    {/*Logo*/}
+                  <Link
+                  to={'/'}
+                  className="md:flex md:flex-row md:items-center"
+                  >
+
+                    <img src="/assets/header/Logo.png" alt=""
+                    className=" max-h-[80px]"
+                    />
+
+                    <div className="font-[Montserrat] font-bold">
+                      <h2 className="text-[#164D72]">Luminus</h2>
+                      <h2 className="text-[#E6AC00]">Book</h2>
+                    </div>
+                  </Link>
+
+                  {/*Form de pesquisa */}
+                  <form onSubmit={handleSubmit} 
+                  className="relative min-w-[450px] max-w-[550px] 
+                  mt-[12px]"
+                  >
+                    <ValorInput
+                      htmlfor={'pesquisa'}
+                      tipo={'text'}
+                      nome={'pesquisa'}
+                      idName={'pesquisa'}
+                      valor={valorPesquisa.pesquisa}
+                      onMudanca={handleChanger}
+                      placeholder={'Esperando pesquisa..'}
+                    />
+
+                    <button
+                    type="submit"
+                    className="cursor-pointer"
+                    >
+                        <img src="/assets/header/Search.png" alt=""
+                        className="max-w-[23.5px] absolute bottom-7.5 left-103.5"
+                        />
+                    </button>
+                  </form> 
+
+                  {/*User logado */}
+                  {user && (    
+                  <Link 
+                  to={'/userPage/estatos'}
+                  className="flex items-center cursor-pointer">
+                      <img src="/assets/header/User.png" alt="" />
+                      <h2 className="font-[Inter] font-medium">{user.email}</h2>
+                  </Link>
+                  )}
+
+                  {!token && (
+                     <Link 
+                     to={'/userPage/estatos'}
+                     className="flex items-center cursor-pointer">
+                         <img src="/assets/header/User.png" alt="" />
+                         <h2 className="font-[Inter] font-medium">Não logado</h2>
+                     </Link>
+                  )}
+            </div>
         </div>
-
-        <AnimatePresence>
-        {open && (
-             <>
-             <div className="fixed inset-0 bg-[black] opacity-80 z-30"
-             onClick={() => setOpen(false)}
-             ></div>
-            <motion.aside 
-            initial={{opacity: 0, x: -50}}
-            animate={{opacity: 1, x: 0}}
-            exit={{opacity: 0, x: -50}}
-            transition={{duration:0.2}}
-            
-            className=" inset-0 fixed max-w-[300px] bg-[#8C5E3C] z-50">
-                <h2 className=""
-                onClick={() => setOpen(null)}
-                >Entrar</h2>
-            </motion.aside>
-             </>
-        )}
-        </AnimatePresence>
-     </main>
     )
 }
 

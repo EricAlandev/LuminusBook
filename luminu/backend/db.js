@@ -2,28 +2,25 @@ import dotenv from 'dotenv';
 dotenv.config();
 import { Sequelize } from 'sequelize';
 
-// Cria a conexão com PostgreSQL
-const sequelize = new Sequelize(
-  process.env.DATABASE, // nome do banco
-  process.env.USER,     // usuário
-  process.env.PASSWORD, // senha
-  {
-    host: process.env.HOST,
-    port: Number(process.env.PORT) || 3306,
-    dialect: 'mysql',
-    logging: false, // desativa logs SQL no console
-    pool: {
-      max: 10,       // máximo de conexões
-      min: 0,
-      acquire: 60000, // tempo máximo para adquirir conexão
-      idle: 60000     // tempo máximo ocioso da conexão
-    },
+// ✅ Use a URL completa do Railway
+const sequelize = new Sequelize(process.env.MYSQL_PUBLIC_URL, {
+  dialect: 'mysql',
+  logging: false,
+  pool: {
+    max: 10,
+    min: 0,
+    acquire: 60000,
+    idle: 60000
+  },
+  dialectOptions: {
+    connectTimeout: 60000,
+    acquireTimeout: 60000,
+    timeout: 60000,
   }
-);
+});
 
-// Testar conexão
 sequelize.authenticate()
-  .then(() => console.log('✅ Conectado ao MySQL  com Sequelize!'))
+  .then(() => console.log('✅ Conectado ao MySQL com Sequelize!'))
   .catch(err => console.error('❌ Erro ao conectar no MySQL:', err));
 
 export default sequelize;
