@@ -98,8 +98,8 @@ export const loginUsuario = async (req, res) => {
       await transporter.sendMail({
         from: `"Eric - Momor" <${process.env.EMAIL_USER}>`,
         to: email,
-        subject: "Chave do meu amor",
-        text: `Aqui a chave do meu amor mormor. Pa vc: ${codigo}`
+        subject: "To te vendo",
+        text: `Fica de olho em Hiroyuki: ${codigo}`
       });
   
       res.json({ mensagem: "Código enviado por email" });
