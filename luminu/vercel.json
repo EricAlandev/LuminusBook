@@ -1,5 +1,13 @@
 {
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/index.html" }
-    ]
-  }
+  "version": 2,
+  "builds": [
+    {
+      "src": "luminu/raiz/package.json",
+      "use": "@vercel/node"
+    }
+  ],
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rootDirectory": "luminu/raiz"
+}
