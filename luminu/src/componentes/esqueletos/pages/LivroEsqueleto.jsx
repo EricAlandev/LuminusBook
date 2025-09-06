@@ -122,6 +122,7 @@ const LivroEsqueleto = () => {
 
                  <div className='hidden md:block'>
                     <nav className='md:max-w-[800px] md:ml-[237px]'>
+                        {/*Definir se pode baixar ou não */}
                         <ul className='flex gap-4 font-[Inter] font-[450] border-b-[6px] border-[#154C71]'>
                             <li>
                                 <NavLink
@@ -186,8 +187,8 @@ const LivroEsqueleto = () => {
                     O livre por ser baixado clicando no botão
                 </p>
 
-                <button className='block mx-auto min-w-[200px] mt-[5px] p-2 font-[Inter] font-light bg-[#D1D1D1] rounded-[8px] '>
-                     Baixar
+                <button className='block mx-auto min-w-[200px] mt-[5px] p-2 font-[Inter] font-light bg-[#D1D1D1] rounded-[8px] cursor-pointer'>
+                     <a href={livro.dowload}>Baixar</a>
                 </button>
 
              </div>

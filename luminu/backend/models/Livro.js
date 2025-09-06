@@ -42,6 +42,10 @@ const Livro = sequelize.define("Livro", {
   ordemLivros: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  dowload: {
+    type: DataTypes.STRING,
+    allowNull: false,
   }
 }, {
   tableName: "livros",       
