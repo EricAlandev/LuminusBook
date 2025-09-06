@@ -167,7 +167,7 @@ const LivroEsqueleto = () => {
                     </div>
 
                  {/*Resumo */}
-                 <p className=' mt-[15px] mb-[52.5px] md:pb-4.5 text-[17.5px] text-center md:border-b-[1.5px] '>{livro.resumo}</p>
+                 <p className=' mt-[15px] mb-[52.5px] md:pb-15.5 text-[17.5px] text-center md:border-b-[1.5px] '>{livro.resumo}</p>
              </div>
                  )}
 
@@ -187,7 +187,7 @@ const LivroEsqueleto = () => {
                     O livre por ser baixado clicando no botão
                 </p>
 
-                <button className='block mx-auto min-w-[200px] mt-[5px] p-2 font-[Inter] font-light bg-[#D1D1D1] rounded-[8px] cursor-pointer'>
+                <button className='block mx-auto min-w-[200px] mt-[5px] md:mb-15.5 p-2 font-[Inter] font-light bg-[#D1D1D1] rounded-[8px] cursor-pointer'>
                      <a href={livro.dowload}>Baixar</a>
                 </button>
 
