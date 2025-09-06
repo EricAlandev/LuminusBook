@@ -4,11 +4,12 @@ import { Link, useParams } from "react-router-dom";
 const Footer = () => {
 
     const {categoria} = useParams();
+
   
    return(   
     <footer className={`w-full ${categoria === "FICÇÃO"? 
         "mt-[56px]" : categoria === "RELIGIÃO"? "mt-[48px]" :
-        "mt-[15px]"} pl-[22px] bg-[#E5E5E5]`}>
+        "mt-[70px]"} pl-[22px] bg-[#E5E5E5]`}>
         
         <div className="flex  gap-7 md:flex  md:max-w-[1000px] md:mx-auto md:gap-160  ">
                             {/*Logo */}
