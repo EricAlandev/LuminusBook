@@ -4,7 +4,7 @@ import axios from "axios";
 import ProductEsque from "../ProductEsque";
 
 const CategoriaPage = () => {
-  const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+  const BASE_URL = import.meta.env.VITE_API_URL ;
   const { categoria } = useParams(); // pega a categoria da URL
   const [dados, setDados] = useState([]); // estado inicial null
 

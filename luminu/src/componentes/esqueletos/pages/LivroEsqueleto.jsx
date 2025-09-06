@@ -3,7 +3,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 const LivroEsqueleto = () => {
-    const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+    const BASE_URL = import.meta.env.VITE_API_URL;
 
     const { id } = useParams();
     const [livro, setLivro] = useState(null);

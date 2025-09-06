@@ -4,7 +4,7 @@ import ValorInput from "../esqueletos/ValorInput";
 import axios from 'axios';
 import {AnimatePresence, motion} from 'framer-motion'
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 
 const Settings = () => {
