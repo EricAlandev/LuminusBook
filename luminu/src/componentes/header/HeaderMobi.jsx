@@ -12,7 +12,12 @@ const HeaderMobile= () => {
     const navigate = useNavigate()
 
     //URL da rota padrão da API
-    const BASE_URL = import.meta.env.VITE_API_URL;
+  // Adicione isso NO TOPO do seu arquivo
+console.log('🔍 Variáveis de ambiente:', import.meta.env);
+console.log('🔍 VITE_API_URL:', import.meta.env.VITE_API_URL);
+
+const BASE_URL = import.meta.env.VITE_API_URL;
+console.log('🔍 BASE_URL:', BASE_URL);
 
     //feito para definir o usuário
     const {user} = useUser();

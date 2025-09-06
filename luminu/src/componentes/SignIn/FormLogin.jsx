@@ -9,7 +9,12 @@ import axios from 'axios';
 
 
 import ValorInput from "../../componentes/esqueletos//ValorInput"
+// Adicione isso NO TOPO do seu arquivo
+console.log('🔍 Variáveis de ambiente:', import.meta.env);
+console.log('🔍 VITE_API_URL:', import.meta.env.VITE_API_URL);
+
 const BASE_URL = import.meta.env.VITE_API_URL;
+console.log('🔍 BASE_URL:', BASE_URL);
 
 
 
