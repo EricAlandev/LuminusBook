@@ -1,4 +1,4 @@
-import Usuario from '../models/Usuario.j';
+import Usuario from '../models/Usuario.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import nodemailer from "nodemailer";
@@ -6,23 +6,24 @@ import nodemailer from "nodemailer";
 //cadastro
 export const criarUsuario = async (req, res) => {
   const { nome, email, senha } = req.body;
+  console.log('📥 Dados recebidos:', req.body);
 
-    // Verifique se os dados estão chegando
-    if (!nome || !email || !senha) {
-      console.log('❌ Dados incompletos:', { nome, email, senha });
-      return res.status(400).json({ mensagem: 'Dados incompletos!' });
-    }
+  if (!nome || !email || !senha) {
+    console.log('❌ Dados incompletos:', { nome, email, senha });
+    return res.status(400).json({ mensagem: 'Dados incompletos!' });
+  }
 
   try {
-    // hash da senha antes de salvar
     const senhaHash = await bcrypt.hash(senha, 10);
+    console.log('📌 Senha hash criada:', senhaHash);
 
-    // cria usuário no banco (INSERT INTO ...)
     const novoUsuario = await Usuario.create({
       nome,
       email,
       senha: senhaHash
     });
+
+    console.log('✅ Usuário criado:', novoUsuario);
 
     res.status(201).json({
       mensagem: 'Usuário criado com sucesso!',
@@ -33,11 +34,8 @@ export const criarUsuario = async (req, res) => {
       }
     });
   } catch (error) {
-    if (error.name === 'SequelizeUniqueConstraintError') {
-      return res.status(400).json({ mensagem: 'Email já cadastrado!' });
-    }
     console.error("💥 Erro detalhado:", error);
-res.status(500).json({ mensagem: 'Erro ao criar usuário', erro: error.message });
+    res.status(500).json({ mensagem: 'Erro ao criar usuário', erro: error.message });
   }
 };
 
