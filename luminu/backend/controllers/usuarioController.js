@@ -1,4 +1,4 @@
-import Usuario from '../models/Usuario.js';
+import Usuario from '../models/Usuario.j';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import nodemailer from "nodemailer";
@@ -36,8 +36,8 @@ export const criarUsuario = async (req, res) => {
     if (error.name === 'SequelizeUniqueConstraintError') {
       return res.status(400).json({ mensagem: 'Email já cadastrado!' });
     }
-    console.error(error);
-    res.status(500).json({ mensagem: 'Erro ao criar usuário' });
+    console.error("💥 Erro detalhado:", error);
+res.status(500).json({ mensagem: 'Erro ao criar usuário', erro: error.message });
   }
 };
 
