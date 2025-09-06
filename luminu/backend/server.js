@@ -8,7 +8,14 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: "*" }));
+app.use(cors({ 
+  origin: [
+    "https://luminus-book.vercel.app", // seu frontend na Vercel
+    "http://localhost:5173" // desenvolvimento
+  ],
+  credentials: true
+}));
+
 app.use("/assets", express.static("assets"));
 
 app.get("/favicon.ico", (req, res) => res.sendStatus(204)); // sem conteúdo
