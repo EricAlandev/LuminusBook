@@ -46,7 +46,11 @@ const FormLogin = () => {
         try {
           const response = await axios.post(
             `${BASE_URL}/api/login`, 
-            nomeState               // envia o objeto com     
+            {
+              nome: nomeState.nome,
+              email: nomeState.email,
+              senha: nomeState.senha
+            }         // envia o objeto com     
                                     //nome, email e senha
           );
           console.log("Resposta da API:", response.data.mensagem);
